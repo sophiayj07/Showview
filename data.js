@@ -8,7 +8,7 @@ const DEFAULT_THEATER_DATA = [
     location: "서울 송파구 올림픽로 240",
     totalSeats: "1,241석",
     description: "국내 최초의 뮤지컬 전용 극장으로, 무대와 객석 간의 거리가 매우 가까워 어떤 좌석에서도 뛰어난 몰입감을 선사합니다.",
-    bannerImage: "assets/banner_theater.png",
+    bannerImage: "banner_theater.png",
     showPoster: "https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?q=80&w=300&auto=format&fit=crop", // placeholder musical poster
     floors: [
       {
@@ -72,7 +72,7 @@ const DEFAULT_THEATER_DATA = [
     location: "서울 용산구 이태원로 294",
     totalSeats: "1,766석",
     description: "대형 뮤지컬 공연에 최적화된 음향과 무대 설비를 갖춘 국내 대표 복합 문화예술 공간입니다.",
-    bannerImage: "assets/banner_theater.png",
+    bannerImage: "banner_theater.png",
     showPoster: "https://images.unsplash.com/photo-1460881680858-30d872d5b530?q=80&w=300&auto=format&fit=crop",
     floors: [
       {
@@ -136,7 +136,7 @@ const DEFAULT_THEATER_DATA = [
     location: "서울 종로구 세종대로 175",
     totalSeats: "3,022석",
     description: "아시아 최대 규모의 무대 설비를 자랑하며, 웅장하고 압도적인 규모의 대형 클래식 및 뮤지컬 공연이 펼쳐지는 예술의 전당입니다.",
-    bannerImage: "assets/banner_theater.png",
+    bannerImage: "banner_theater.png",
     showPoster: "https://images.unsplash.com/photo-1514306191717-452ec28c7814?q=80&w=300&auto=format&fit=crop",
     floors: [
       {
@@ -205,7 +205,7 @@ const SEED_REVIEWS = {
       rating: 5,
       date: "2026-06-10",
       content: "샤롯데 대박 좌석입니다! 1층 3열 중앙이라 무대 배우 표정 연기 눈 깜빡임까지 다 보입니다. 시야 방해 전혀 없고 스피커 소리도 웅장하게 들립니다. 다만 목이 아주 살짝 아플 수 있어요.",
-      image: "assets/view_vip.png"
+      image: "view_vip.png"
     },
     {
       id: "rev2",
@@ -213,7 +213,7 @@ const SEED_REVIEWS = {
       rating: 4,
       date: "2026-06-15",
       content: "가까워서 몰입감이 최고예요. 지킬의 변신씬에서 감정이 온전히 전달됩니다. 무대 안쪽 깊숙이 들어가면 발목 아래가 쪼금 가리지만 대체적으로 만족합니다.",
-      image: "assets/view_vip.png"
+      image: "view_vip.png"
     }
   ],
   "charlotte-1-1F-C-8-6": [
@@ -223,7 +223,7 @@ const SEED_REVIEWS = {
       rating: 5,
       date: "2026-05-20",
       content: "개인적으로 샤롯데에서 제일 좋아하는 8열 중앙입니다. 전체적인 연출과 앙상블 군무가 한눈에 잘 보이고, 음향 밸런스도 가장 조화로운 좌석입니다. 무조건 추천!",
-      image: "assets/view_r.png"
+      image: "view_r.png"
     }
   ],
   "charlotte-1-1F-L-4-1": [
@@ -233,7 +233,7 @@ const SEED_REVIEWS = {
       rating: 2.5,
       date: "2026-06-02",
       content: "왼쪽 극사이드라 왼쪽 구석에서 진행되는 씬은 배우 등짝만 보입니다 ㅠㅠ 주요 장면들은 중앙에서 이뤄져서 보는데 지장은 덜하지만 시야 제한이 확실히 있습니다.",
-      image: "assets/view_obstructed.png"
+      image: "view_obstructed.png"
     }
   ],
   "charlotte-2-2F-C-3-5": [
@@ -243,7 +243,7 @@ const SEED_REVIEWS = {
       rating: 4,
       date: "2026-06-12",
       content: "샤롯데는 2층 3열도 시야가 진짜 쾌적하네요. 1열은 난간 방해 있다고 들어서 3열로 왔는데 난간 전혀 안 걸리고 무대 깊은 곳까지 훤하게 다 보입니다. 망원경 챙기시면 최고!",
-      image: "assets/view_s.png"
+      image: "view_s.png"
     }
   ],
 
@@ -255,7 +255,7 @@ const SEED_REVIEWS = {
       rating: 5,
       date: "2026-06-08",
       content: "블루스퀘어 4열 중앙은 무대와 정말 가깝습니다. 음향이 빵빵하고 웅장한 레미제라블 음악이 귀에 직접 꽂힙니다. 오케스트라 피트 때문에 적당한 거리감도 유지되어서 좋습니다.",
-      image: "assets/view_vip.png"
+      image: "view_vip.png"
     }
   ],
   "bluesquare-1-1F-L-5-1": [
@@ -265,7 +265,7 @@ const SEED_REVIEWS = {
       rating: 3,
       date: "2026-06-11",
       content: "왼쪽 스피커랑 너무 가까워서 귀가 좀 먹먹합니다. 무대 왼쪽 편 구조물에 가려 무대 안쪽 깊은 곳이 종종 안 보여요. 가격 대비 약간 아쉽지만 캐스팅 때문에 봤습니다.",
-      image: "assets/view_obstructed.png"
+      image: "view_obstructed.png"
     }
   ],
   "bluesquare-2-2F-C-5-6": [
@@ -275,16 +275,25 @@ const SEED_REVIEWS = {
       rating: 3.5,
       date: "2026-05-18",
       content: "무대가 꽤 멀긴 합니다만 전체 동선을 보기에는 정말 시원합니다. 음향도 2층치곤 골고루 퍼지네요. 오페라글라스는 필수 지참하시는 걸 추천합니다.",
-      image: "assets/view_s.png"
+      image: "view_s.png"
     }
   ]
 };
 
-// Initialize localStorage with seed data if not present
-if (!localStorage.getItem("THEATER_DATA")) {
+// Initialize and migrate localStorage with seed data
+let storedTheaters = localStorage.getItem("THEATER_DATA");
+let storedReviews = localStorage.getItem("SEEYA_REVIEWS");
+
+// If storage has old assets/ prefix, overwrite to migrate paths
+if (storedTheaters && storedTheaters.includes("assets/")) {
+  localStorage.setItem("THEATER_DATA", JSON.stringify(DEFAULT_THEATER_DATA));
+} else if (!storedTheaters) {
   localStorage.setItem("THEATER_DATA", JSON.stringify(DEFAULT_THEATER_DATA));
 }
-if (!localStorage.getItem("SEEYA_REVIEWS")) {
+
+if (storedReviews && storedReviews.includes("assets/")) {
+  localStorage.setItem("SEEYA_REVIEWS", JSON.stringify(SEED_REVIEWS));
+} else if (!storedReviews) {
   localStorage.setItem("SEEYA_REVIEWS", JSON.stringify(SEED_REVIEWS));
 }
 

@@ -272,15 +272,15 @@ document.addEventListener("DOMContentLoaded", () => {
     // Return appropriate seat visual photo
     const isObstructedZone = zoneId.endsWith("-L") || zoneId.endsWith("-R");
     if (isObstructedZone && seatClass !== "VIP") {
-      return "assets/view_obstructed.png";
+      return "view_obstructed.png";
     }
     
     switch (seatClass) {
-      case "VIP": return "assets/view_vip.png";
-      case "R": return "assets/view_r.png";
-      case "S": return "assets/view_s.png";
-      case "A": return "assets/view_s.png";
-      default: return "assets/view_r.png";
+      case "VIP": return "view_vip.png";
+      case "R": return "view_r.png";
+      case "S": return "view_s.png";
+      case "A": return "view_s.png";
+      default: return "view_r.png";
     }
   }
 
