@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShowView - 뮤지컬 극장 좌석 시야 확인 플랫폼</title>
+  <meta name="description" content="뮤지컬/연극 좌석별 실제 시야 사진과 관객 평점을 미리 확인해 실패 없는 예매를 도와주는 시야 공유 플랫폼입니다.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo" id="logo-btn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: #ec4899;"><path d="M2 12a10 10 0 1 0 20 0 10 10 0 1 0-20 0Z"/><path d="M12 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"/><path d="m19 19-3.5-3.5"/><path d="m5 5 3.5 3.5"/></svg>
+        <span>ShowView</span>
+      </a>
+      <div class="nav-actions">
+        <button class="nav-btn" id="nav-login-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+          <span>로그인</span>
+        </button>
+        <span id="user-profile-info" style="display: none; font-size: 0.9rem; font-weight: 500; color: var(--accent-primary-hover);"></span>
+        <button class="nav-btn" id="nav-logout-btn" style="display: none;">로그아웃</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main>
+    
+    <!-- 1. HOME / SEARCH PAGE -->
+    <section id="home-view" class="page-view active">
+      <div class="hero-banner">
+        <div class="hero-content">
+          <h1>실패 없는 티켓 예매를 위한 좌석 시야 확인</h1>
+          <p>예매 전, 극장 배치도에서 원하는 좌석을 클릭하고 실제 무대 시야와 평점을 간편하게 조회해 보세요.</p>
+          <div class="search-container">
+            <input type="text" id="search-input" class="search-input" placeholder="극장 또는 공연명을 입력하세요 (예: 샤롯데, 지킬)">
+            <button class="search-btn" id="search-btn">검색</button>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="section-title">등록된 극장 목록</h2>
+      <div class="theater-grid" id="theater-list">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </section>
+
+    <!-- 2. THEATER DETAIL / SEAT MAP PAGE -->
+    <section id="theater-view" class="page-view">
+      <div class="theater-detail-header">
+        <div class="back-link" id="back-to-home">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          극장 목록으로 돌아가기
+        </div>
+        <div class="detail-title-row">
+          <div>
+            <div class="detail-show" id="detail-show-name">뮤지컬 <지킬 앤 하이드></div>
+            <h1 class="detail-theater-name" id="detail-theater-name">샤롯데씨어터</h1>
+            <p style="color: var(--text-dim); font-size: 0.9rem;" id="detail-location">서울 송파구 올림픽로 240</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="workspace-layout">
+        <!-- SEAT MAP CONTAINER (LEFT) -->
+        <div class="seatmap-section glass-panel">
+          <div class="map-toolbar">
+            <div class="floor-toggle" id="floor-tab-container">
+              <!-- Floor tabs rendered here -->
+            </div>
+            
+            <div class="overlay-filter-box">
+              <span style="font-size: 0.85rem; color: var(--text-sub);">보기 설정:</span>
+              <select class="overlay-select" id="overlay-mode-select">
+                <option value="tier">좌석 등급별 보기</option>
+                <option value="rating">시야 평점별 보기</option>
+              </select>
+            </div>
+
+            <label class="compare-mode-toggle">
+              <input type="checkbox" id="compare-mode-checkbox" class="compare-checkbox">
+              <span>좌석 비교 모드</span>
+            </label>
+          </div>
+
+          <!-- Interactive Graphic Seat Map -->
+          <div class="seatmap-container" id="seat-map-wrapper">
+            <div class="stage-graphic">STAGE</div>
+            <div class="seating-chart" id="seating-chart-container">
+              <!-- Rendered dynamically by app.js -->
+            </div>
+          </div>
+
+          <!-- Color Legends -->
+          <div class="map-legend" id="map-legend-container">
+            <!-- Legend items updated based on overlay mode -->
+          </div>
+        </div>
+
+        <!-- SEAT DETAIL SIDEBAR (RIGHT) -->
+        <div class="seat-details-panel glass-panel" id="seat-detail-panel">
+          <!-- Default Empty State -->
+          <div class="panel-empty-state" id="panel-empty-state">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--text-dim);"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <p style="margin-top: 1rem;">좌석 배치도에서 좌석을 클릭하시면<br>실제 시야 평점과 리뷰가 표시됩니다.</p>
+          </div>
+
+          <!-- Active Details -->
+          <div class="detail-view-container" id="panel-active-state" style="display: none;">
+            <div class="detail-header">
+              <div class="detail-seat-num" id="detail-seat-title">1층 B구역 3열 6번</div>
+              <div class="detail-seat-tier" id="detail-seat-tier">VIP석</div>
+              <div class="rating-summary-box">
+                <div class="stars" id="detail-stars">★★★★★</div>
+                <div class="rating-num" id="detail-rating-num">4.8</div>
+                <div class="review-count" id="detail-review-count">(리뷰 2개)</div>
+              </div>
+            </div>
+
+            <!-- View Photo Box -->
+            <div class="seat-photo-container">
+              <img id="detail-view-img" src="assets/view_vip.png" alt="시야 이미지">
+              <div class="seat-photo-overlay">
+                <span>실제 관객 등록 사진</span>
+                <span class="zoom-icon">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </span>
+              </div>
+            </div>
+
+            <!-- Review Comments list -->
+            <div style="font-weight: 600; font-size: 0.95rem;">좌석 리뷰</div>
+            <div class="comments-list" id="detail-comments-list">
+              <!-- Comment cards go here -->
+            </div>
+
+            <!-- Write Review button -->
+            <div class="write-review-prompt">
+              <button class="nav-btn primary" id="add-review-trigger-btn" style="width: 100%; justify-content: center; padding: 0.75rem;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+                시야 평점 및 사진 등록
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. COMPARE VIEW PAGE (SPLIT SCREEN) -->
+    <section id="compare-view" class="page-view">
+      <div class="theater-detail-header">
+        <div class="back-link" id="back-to-theater-map">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          좌석 배치도로 돌아가기
+        </div>
+        <h1 class="detail-theater-name">좌석 시야 비교</h1>
+        <p style="color: var(--text-dim);" id="compare-theater-subtitle">샤롯데씨어터 - 뮤지컬 지킬 앤 하이드</p>
+      </div>
+
+      <div class="compare-layout-container" id="compare-columns-wrapper">
+        <!-- Side-by-side columns rendered dynamically -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FLOATING COMPARE ACTION BAR -->
+  <div class="compare-action-bar" id="compare-action-bar">
+    <div class="compare-info">
+      <span class="compare-title">비교 모드가 켜져 있습니다.</span>
+      <span class="compare-count" id="compare-selected-count">선택한 좌석: 0 / 3</span>
+    </div>
+    <div class="compare-actions">
+      <button class="nav-btn" id="compare-cancel-btn">초기화</button>
+      <button class="nav-btn primary" id="compare-submit-btn" disabled>선택 좌석 비교하기</button>
+    </div>
+  </div>
+
+  <!-- MODALS -->
+  
+  <!-- 1. LOGIN MODAL -->
+  <div class="modal-overlay" id="login-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">간편 로그인</h3>
+        <button class="modal-close" id="login-modal-close">✕</button>
+      </div>
+      <div class="modal-body">
+        <form class="login-form" id="login-form">
+          <div class="rating-form-group">
+            <label for="username-input">작성자 닉네임</label>
+            <input type="text" id="username-input" class="form-input" placeholder="시야 후기 작성 시 사용될 닉네임을 적어주세요" required minlength="2">
+            <div class="helper-text">별도의 패스워드 없이 즉시 가상의 프로필로 로그인하여 리뷰 작성이 가능합니다.</div>
+          </div>
+          <button type="submit" class="nav-btn primary" style="width: 100%; justify-content: center; padding: 0.75rem; font-size: 1rem; border: none; cursor: pointer;">
+            로그인 완료
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. WRITE REVIEW MODAL -->
+  <div class="modal-overlay" id="review-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="review-modal-title">1층 B구역 3열 6번 리뷰 작성</h3>
+        <button class="modal-close" id="review-modal-close">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="review-form" style="display: flex; flex-direction: column; gap: 1.25rem;">
+          <!-- Star Rating -->
+          <div class="rating-form-group">
+            <label>시야 만족도 평점</label>
+            <div class="star-rating-input" id="star-rating-input">
+              <span data-val="1">★</span>
+              <span data-val="2">★</span>
+              <span data-val="3">★</span>
+              <span data-val="4">★</span>
+              <span data-val="5">★</span>
+            </div>
+            <input type="hidden" id="review-rating-val" required value="0">
+          </div>
+
+          <!-- Review Comment -->
+          <div class="rating-form-group">
+            <label for="review-comment-input">시야 상세 설명 및 코멘트</label>
+            <textarea id="review-comment-input" class="form-textarea" placeholder="앞 열 관객에 의한 시야 가림, 무대 깊이(배우 등) 시야, 목 피로도 등을 구체적으로 남겨 주시면 다른 관객에게 큰 도움이 됩니다." required></textarea>
+          </div>
+
+          <!-- File Upload -->
+          <div class="rating-form-group">
+            <label>시야 사진 첨부 (필수)</label>
+            <div class="file-upload-wrapper">
+              <label class="file-upload-box" id="file-drop-area">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--text-dim);"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                <span>시야 사진 선택하기 또는 파일을 끌어다 놓으세요</span>
+                <input type="file" id="review-file-input" accept="image/*" required>
+              </label>
+              <div class="upload-preview" id="upload-preview-box">
+                <img id="upload-preview-img" src="" alt="업로드 이미지 미리보기">
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="nav-btn primary" style="width: 100%; justify-content: center; padding: 0.75rem; font-size: 1rem; border: none; cursor: pointer; margin-top: 0.5rem;">
+            리뷰 등록하기
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. PHOTO LIGHTBOX MODAL -->
+  <div class="modal-overlay" id="photo-viewer-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="photo-viewer-title">좌석 실제 시야</h3>
+        <button class="modal-close" id="photo-viewer-close">✕</button>
+      </div>
+      <div class="modal-body" style="padding: 0; background: black;">
+        <img src="" class="lightbox-img" id="lightbox-image-img" alt="좌석 시야">
+      </div>
+    </div>
+  </div>
+
+  <!-- Load Database and Logic Scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
